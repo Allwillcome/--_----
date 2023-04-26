@@ -95,7 +95,6 @@ class Gaitpy():
         import util
         import warnings
         import numpy as np
-
         print('\tExtracting features...')
 
         # Load data
@@ -103,7 +102,7 @@ class Gaitpy():
 
         # Calculate sensor height
         sensor_height = util._calculate_sensor_height(subject_height, subject_height_units, sensor_height_ratio)
-
+        
         # If classified gait is provided, load pandas dataframe or h5 file
         if classified_gait is not None:
             if type(classified_gait) is str:
@@ -133,9 +132,11 @@ class Gaitpy():
         bout_n = 1
         # Loop through gait bouts
         for row_n, bout in gait_bouts.iterrows():
+            
             bout_indices = (timestamps.astype('datetime64[ms]') >= bout.start_time) & (timestamps.astype('datetime64[ms]') <= bout.end_time)
-            bout_data = pd.DataFrame([])
-            bout_data['y'] = pd.DataFrame(y_accel.loc[bout_indices].reset_index(drop=True))
+            bout_data = pd.DataFrame([])        
+            bout_data['y'] = pd.Series(y_accel.loc[bout_indices].reset_index(drop=True))     
+            #bout_data['y'] = pd.DataFrame(y_accel.loc[bout_indices].reset_index(drop=True)) # 报错疑似这一行出错
             bout_data['ts'] = timestamps.loc[bout_indices].reset_index(drop=True)
             if len(bout_data.y) <= 15:
                 warnings.warn('There are too few data points between '+str(bout.start_time)+' and '+str(bout.end_time)+', skipping bout...')
@@ -219,7 +220,7 @@ class Gaitpy():
         from bokeh.plotting import figure, output_file, save, show
         from bokeh.models import Legend, Span
         import pandas as pd
-        import
+        import util
         import numpy as np
 
         print('\tPlotting contacts...')
