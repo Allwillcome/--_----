@@ -1,0 +1,31 @@
+
+
+## Gaitpy 函数关系
+# 使用 ASCII 树状图显示
+├── class Gaitpy
+│   ├── __init__
+│   ├── extract_features
+│   ├── plot_contacts()
+│   └── classify_bouts() 
+├── util.py
+│   ├── _butter_lowpass()
+│   ├── _butter_lowpass_filter()
+│   ├── _band_pass_filter()
+│   ├── _detect_peaks()
+│   ├── _cwt()
+│   ├── _calculate_sensors_height()
+│   ├── _cwt_feature_extraction()
+│   ├── _optimization()
+│   ├── _height_change_com()
+│   ├── _resample_data()
+│   ├── _load_data()
+│   ├── _extract_signal_features()
+│   └── _concatenate_window()
+└── signal_features.py
+    ├── _signal_features()
+    ├── _signal_entropy()
+    ├── _signal_rms()
+    ├── _signal_range()
+    ├── _dominant_frequency()
+    ├── _mean_cross_rate()
+    └── _histogram()
