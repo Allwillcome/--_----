@@ -310,7 +310,10 @@ def _load_data(self, down_sample):
 
 def _extract_signal_features(data, timestamps, sample_rate, window_length=3.0):
     import pandas as pd
-    from . import signal_features as sf
+    #from . import signal_features as sf 
+    # 阿帅批 修改此处代码 
+    # 不修改则报错 ImportError: attempted relative import with no known parent package
+    import signal_features as sf #阿帅批 修改此处代码
     import warnings
 
     data.reset_index(drop=True, inplace=True)
