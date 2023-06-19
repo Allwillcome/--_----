@@ -152,7 +152,7 @@ def _cwt_feature_extraction(cwt_features, sensor_height):
     cwt_features.loc[cwt_features['Gait_Cycle'] == 1, 'swing_asymmetry'] = abs(cwt_features.swing.shift(-1) - cwt_features.swing)
 
     # step length
-    cwt_features.loc[cwt_features['Gait_Cycle'] == 1, 'step_length'] = 2*(np.sqrt((2*sensor_height*cwt_features.CoM_height)-(cwt_features.CoM_height**2)))
+    cwt_features.loc[cwt_features['Gait_Cycle'] == 1, 'step_length'] = 2*(np.sqrt((2*sensor_height* cwt_features.CoM_height)-(cwt_features.CoM_height**2)))
     # asymmetry
     cwt_features.loc[cwt_features['Gait_Cycle'] == 1, 'step_length_asymmetry'] = abs(cwt_features.step_length.shift(-1) - cwt_features.step_length)
 
