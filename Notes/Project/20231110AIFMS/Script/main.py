@@ -3,8 +3,6 @@ import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QFileDialog, QLabel
 import pandas as pd
 import subprocess #Mac 电脑专用，调用 LibreOffice
-from reportlab.lib import pagesizes
-from reportlab.pdfgen import canvas
 from PyPDF2 import PdfReader, PdfWriter
 
 class ExcelToPDFConverter(QWidget):
@@ -14,7 +12,7 @@ class ExcelToPDFConverter(QWidget):
     
     def initUI(self):
         # 设置窗口的标题和大小
-        self.setWindowTitle("智能 FMS功能性筛查 训练方案")
+        self.setWindowTitle("智能FMS功能性筛查训练方案")
         self.setGeometry(300, 300, 350, 200)
 
         # 布局和组件
@@ -40,13 +38,14 @@ class ExcelToPDFConverter(QWidget):
         if fileName:
             self.label.setText(fileName)
 
-    # 调用 Libreoffice 将 excel 导出为 pdf
+    #  将 excel 导出为 pdf
     def ExcelToPdf(self):
         excel_path = self.label.text()
         excel_dir,_ = os.path.split(excel_path)
         output_pdf_path = excel_dir
         pdf_path = excel_path.replace(".xlsx", ".pdf")
         try:
+            # 使用 Libreoffice 将excel 转变为 pdf
             subprocess.run(["/Applications/LibreOffice.app/Contents/MacOS/soffice", 
                             "--headless", "--convert-to", "pdf", excel_path, 
                             "--outdir", output_pdf_path], check=True)
@@ -63,9 +62,9 @@ class ExcelToPDFConverter(QWidget):
             output_pdf_path =  pdf_path
             with open(output_pdf_path, "wb") as output_pdf:
                 writer.write(output_pdf)
-            self.label.setText("✅解决方案 已保存至：\n"+ pdf_path)
+            self.label.setText("✅训练方案已保存至：\n"+ pdf_path)
         except subprocess.CalledProcessError as e:
-            print("生成方案失败:\n ", e)
+            print("方案生成失败:\n ", e)
     
     
 if __name__ == "__main__":
